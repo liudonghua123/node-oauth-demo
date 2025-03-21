@@ -35,7 +35,7 @@ const oauth = async ctx => {
   console.log('try to get user info like mobile phone number');
   const result = await axios({
     method: 'post',
-    url: `https://ids.ynu.edu.cn/authserver/oauthApi/user/getMobile`,
+    url: `https://ids.ynu.edu.cn/authserver/oauthApi/user/profile`,
     headers: {
       accept: 'application/json',
     },
@@ -44,7 +44,7 @@ const oauth = async ctx => {
     }
   });
   console.log(result.data);
-  const name = result.data.name;
+  const name = result.data.attributes.nickName;
 
   ctx.response.redirect(`/welcome.html?name=${name}`);
 };

@@ -16,10 +16,10 @@
   const client_id = '1242483802708951040';
 
   const authorize_uri = 'https://ids.ynu.edu.cn/authserver/oauth2.0/authorize';
-  const redirect_uri = 'http://localhost:8080/oauth/redirect';
+  const redirect_uri = `${new URL(location.href).origin}/oauth/redirect`;
 
   const link = document.getElementById('login');
-  link.href = `${authorize_uri}?client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&response_type=code&scope=profile`;
+  link.href = `${authorize_uri}?client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&response_type=code`;
 </script>
 
 </body>

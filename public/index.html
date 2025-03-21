@@ -9,17 +9,17 @@
 </head>
 
 <body>
-        <a id="login">Login with GitHub</a>
+        <a id="login">Login with YNU</a>
 
 <script>
   // fill in your cliend_id
-  const client_id = '7e015d8ce32370079895';
+  const client_id = '1242483802708951040';
 
-  const authorize_uri = 'https://github.com/login/oauth/authorize';
+  const authorize_uri = 'https://ids.ynu.edu.cn/authserver/oauth2.0/authorize';
   const redirect_uri = 'http://localhost:8080/oauth/redirect';
 
   const link = document.getElementById('login');
-  link.href = `${authorize_uri}?client_id=${client_id}&redirect_uri=${redirect_uri}`;
+  link.href = `${authorize_uri}?client_id=${client_id}&redirect_uri=${encodeURIComponent(redirect_uri)}&response_type=code&scope=profile`;
 </script>
 
 </body>

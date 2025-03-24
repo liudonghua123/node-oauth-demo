@@ -27,10 +27,7 @@ const oauth = async (ctx) => {
     redirect_uri
   )}`;
   console.log("try to get access token using url:", url);
-  const tokenResponse = await axios({
-    method: "post",
-    url: url,
-  }).catch(function (error) {
+  const tokenResponse = await axios.post(url).catch(function (error) {
     console.log(error.response.status);
     console.log(error.response.data);
   });
@@ -39,16 +36,12 @@ const oauth = async (ctx) => {
   console.log(`access token: ${accessToken}`);
 
   console.log("try to get user info like mobile phone number");
-  const result = await axios({
-    method: "post",
-    url: profileUrl,
-    headers: {
-      accept: "application/json",
-    },
-    data: {
-      access_token: accessToken,
-    },
-  });
+  const result = await axios
+    .post(`${profileUrl}?access_token=${accessToken}`)
+    .catch(function (error) {
+      console.log(error.response.status);
+      console.log(error.response.data);
+    });
   console.log(result.data);
   const name = result.data.attributes.nickName;
 

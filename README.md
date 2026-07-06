@@ -66,6 +66,24 @@ try to get user mobile from mobile endpoint
 { mobile: 'xxxxxxxxxxx' }
 ```
 
+If you use oidc, the profile endpoint can return more info like this
+
+```
+
+  attributes: {
+    eduPersonCardID: 'xxxxxxxxxxxxxxxxxx',
+    telephoneNumber: 'xxxxxxxxxxx',
+    isPhoneValidated: '1',
+    nickName: 'xxx',
+    isEmailValidated: '1',
+    securityEmail: 'xxx@qq.com',
+    eduPersonOrgDN: 'xxxxxx',
+    cn: 'xxx'
+  },
+  id: 'xxxxxxxx'
+}
+```
+
 ## Notices
 
 - The access url of the new created app should be the same as the authorized url configured later. Or you will get 401 error when call get_access_token api.

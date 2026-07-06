@@ -13,6 +13,7 @@ const {
   REDIRECT_URI: redirect_uri,
   ACCESSTOKEN_URL: accessTokenUrl,
   PROFILE_URL: profileUrl,
+  MOBILE_URL: mobileUrl,
 } = process.env;
 
 const app = new Koa();
@@ -35,15 +36,24 @@ const oauth = async (ctx) => {
   const accessToken = tokenResponse.data.access_token;
   console.log(`access token: ${accessToken}`);
 
-  console.log("try to get user info like mobile phone number");
-  const result = await axios
+  console.log("try to get user info from profile endpoint");
+  const profile = await axios
     .post(`${profileUrl}?access_token=${accessToken}`)
     .catch(function (error) {
       console.log(error.response.status);
       console.log(error.response.data);
     });
-  console.log(result.data);
-  const name = result.data.attributes.nickName;
+  console.log(profile.data);
+  const name = profile.data.attributes.nickName;
+
+  console.log("try to get user mobile from mobile endpoint");
+  const mobile = await axios
+    .post(`${mobileUrl}?access_token=${accessToken}`)
+    .catch(function (error) {
+      console.log(error.response.status);
+      console.log(error.response.data);
+    });
+  console.log(mobile.data);
 
   ctx.response.redirect(`/welcome.html?name=${name}`);
 };
